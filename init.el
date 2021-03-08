@@ -183,3 +183,7 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+
+(setq org-agenda-prefix-format "%e %l")
+(setq-default line-spacing 8)
