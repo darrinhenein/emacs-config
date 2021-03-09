@@ -7,6 +7,9 @@
 
 (package! darkroom)
 
+
+(package! org-super-agenda)
+
 (use-package markdown-mode
   :ensure t
   :mode (("README\\.md\\'" . gfm-mode)

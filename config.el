@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Hack" :size 12 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Hack" :size 12))
+(setq doom-font (font-spec :family "Source Code Variable" :size 12 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Source Code Variable" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -45,8 +45,39 @@
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
 )
+;;
+;;
+(after! org
+       (setq org-todo-keywords
+             '((sequence "TODO" "PAUSED" "NOTE" "|" "DONE" "DEAD")
+               (sequence "[ ]" "[-]" "[?]" "|" "[X]" "[.]"))
+             )
+       (setq hl-todo-keyword-faces
+             '(("TODO" . org-todo)
+               ("NOTE" . (:foreground "LightSalmon" :weight "bold"))
+               ("PAUSED" . org-done)
+               ("DEAD" . org-done)))
+
+        ;; (setq org-agenda-prefix-format "%-13.13c %s")
+        (setq org-agenda-prefix-format "  ")
+        (setq org-agenda-include-diary t)
+        (setq org-agenda-span 7)
+        (setq org-agenda-start-on-weekday 1)
+)
 
 
+(after! org-agenda
+  (org-super-agenda-mode))
+
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-include-deadlines t
+      org-agenda-block-separator nil
+      org-agenda-tags-column 100
+      org-agenda-compact-blocks t)
+
+(setq org-super-agenda-groups
+       '((:auto-category t)))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

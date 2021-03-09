@@ -23,7 +23,7 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       (ivy +fuzzy)       ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -185,5 +185,4 @@
        (default +bindings +smartparens))
 
 
-(setq org-agenda-prefix-format "%e %l")
-(setq-default line-spacing 8)
+(setq-default line-spacing 2)
