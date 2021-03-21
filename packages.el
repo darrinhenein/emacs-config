@@ -7,6 +7,7 @@
 
 (package! darkroom)
 
+(package! org-download)
 
 (package! org-super-agenda)
 

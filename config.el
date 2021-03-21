@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Source Code Pro" :size 12 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 12))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 12 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -30,8 +30,33 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 
-(setq org-directory "~/iCloud/org")
+(setq org-agenda-files (directory-files-recursively "~/iCloud/org/" "\\.org$"))
 (setq org-roam-directory "~/iCloud/org")
+(add-hook 'after-init-hook 'org-roam-mode)
+
+(setq org-journal-dir "~/iCloud/org/Journal/")
+(setq org-journal-date-format "%A, %B %d %Y")
+(setq org-journal-file-format "%Y-%m-%d (W%V).org")
+(setq org-journal-enable-agenda-integration t)
+(setq org-journal-file-header "#+TITLE: Weekly Notes - Week %V %Y\n\n")
+(setq org-journal-file-type 'weekly)
+
+(after! org-journal
+        (setq org-roam-completion-everywhere t)
+)
+
+
+(after! org-roam
+        (setq org-roam-completion-everywhere t)
+        (map! :leader
+            :prefix "n"
+            :desc "org-roam" "l" #'org-roam
+            :desc "org-roam-insert" "i" #'org-roam-insert
+            :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+            :desc "org-roam-find-file" "f" #'org-roam-find-file
+            :desc "org-roam-show-graph" "g" #'org-roam-show-graph
+            :desc "org-roam-insert" "i" #'org-roam-insert
+            :desc "org-roam-capture" "c" #'org-roam-capture))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -51,13 +76,21 @@
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
 )
 
-;; (add-hook 'org-mode-hook
-;;         (lambda ()
-;;         (push '("{ }" . "☐" ) prettify-symbols-alist)
-;;         (push '("{X}" . "☑️" ) prettify-symbols-alist)
-;;         (push '("{-}" . "⌻" ) prettify-symbols-alist)
-;;         (prettify-symbols-mode)
-;;         ))
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+(setq org-download-annotate-function (lambda (_link) ""))
+(use-package org-download
+  :after org
+  :defer nil
+  :custom
+  (org-download-method 'directory)
+  (org-download-image-dir "_images")
+  (org-download-heading-lvl nil)
+  (org-download-screenshot-method "pngpaste %s")
+  :bind
+  (:map org-mode-map
+        (("s-Y" . org-download-clipboard)
+         ("s-y" . org-download-yank))))
 
 (after! org
        (setq org-todo-keywords
