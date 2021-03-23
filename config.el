@@ -20,7 +20,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Source Code Variable" :size 12 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 13))
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -65,7 +65,6 @@
 (add-hook 'writeroom-mode-hook (lambda ()
                                 (display-line-numbers-mode -1)
                                 (text-scale-increase 0)
-                                (writeroom-width 80)
                                 ))
 
 (setq-default line-spacing 2)
@@ -130,6 +129,7 @@
 
 (setq org-super-agenda-groups
        '((:auto-category t)))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
