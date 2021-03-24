@@ -40,6 +40,7 @@
 (setq org-journal-enable-agenda-integration t)
 (setq org-journal-file-header "#+TITLE: Weekly Notes - Week %V %Y\n\n")
 (setq org-journal-file-type 'weekly)
+(setq org-journal-enable-agenda-integration t)
 
 (after! org-journal
         (setq org-roam-completion-everywhere t)
@@ -80,7 +81,7 @@
 )
 
 (setq org-startup-with-inline-images t)
-(setq org-image-actual-width (/ (display-pixel-width) 3))
+(setq org-image-actual-width (/ (display-pixel-width) 4))
 (setq org-download-annotate-function (lambda (_link) ""))
 (use-package org-download
   :after org
@@ -97,7 +98,7 @@
 
 (after! org
        (setq org-todo-keywords
-             '((sequence "TODO" "HOLD" "NOTE" "|" "DONE" "DEAD")
+             '((sequence "TODO(t)" "HOLD(h)" "NOTE(n)" "|" "DONE(d)" "DEAD(x)")
                (sequence "{ }" "{-}" "{?}" "|" "{X}" "{.}"))
              )
 
@@ -109,26 +110,38 @@
                ("DEAD" . org-done)))
 
         ;; (setq org-agenda-prefix-format "%-13.13c %s")
-        (setq org-agenda-prefix-format "  ")
-        (setq org-agenda-include-diary t)
-        (setq org-agenda-span 7)
-        (setq org-agenda-start-on-weekday 1)
-        (setq org-log-done 'time)
 )
 
-
-(after! org-agenda
-  (org-super-agenda-mode))
-
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
+;; (setq org-agenda-skip-scheduled-if-done 0
+(setq org-agenda-skip-deadline-if-done t
+      org-log-done 'time
+      org-agenda-start-with-log-mode t
       org-agenda-include-deadlines t
       org-agenda-block-separator nil
       org-agenda-tags-column 100
-      org-agenda-compact-blocks t)
+      org-agenda-compact-blocks t
+      org-agenda-include-diary t
+      org-agenda-span 7
+      org-super-agenda-header-prefix ""
+      org-super-agenda-group-property-name "Project"
+      org-agenda-start-on-weekday 1)
 
-(setq org-super-agenda-groups
-       '((:auto-category t)))
+(setq org-agenda-prefix-format "  ")
+(setq org-agenda-span 'week
+      org-super-agenda-groups
+      '(
+        (:name "NOTES"
+         :todo "NOTE"
+         )
+        (:name "DONE"
+         :todo "DONE"
+         :log closed
+         )
+        )
+)
+
+(after! org-agenda
+  (org-super-agenda-mode))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
