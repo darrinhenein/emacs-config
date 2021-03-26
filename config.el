@@ -19,13 +19,15 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Source Code Variable" :size 12 :weight 'regular)
+(setq doom-font (font-spec :family "Source Code Pro" :size 12 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-challenger-deep)
+
+(setq global-evil-surround-mode 1)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -78,8 +80,16 @@
 (add-hook 'after-init-hook 'global-hl-todo-mode)
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
-)
+    )
 
+(setq doom-themes-enable-bold nil)
+;; (custom-theme-set-faces
+;;   'user
+;;   '(org-level-1 ((t (:inherit :weight semi-bold))))
+;;   '(org-level-2 ((t (:inherit :weight semi-bold))))
+;;   '(org-level-3 ((t (:inherit :weight regular)))))
+
+(setq org-hide-emphasis-markers t)
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width (/ (display-pixel-width) 4))
 (setq org-download-annotate-function (lambda (_link) ""))
