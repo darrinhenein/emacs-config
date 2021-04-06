@@ -19,15 +19,15 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Source Code Pro" :size 12 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14))
+(setq doom-font (font-spec :family "iA Writer Mono V" :size 12 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "iA Writer Quattro V" :size 15))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-challenger-deep)
 
-(setq global-evil-surround-mode 1)
+;; (setq global-evil-surround-mode 1)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -44,10 +44,14 @@
 (setq org-journal-file-type 'weekly)
 (setq org-journal-enable-agenda-integration t)
 
+
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-dabbrev-downcase 0)
+(setq company-idle-delay 0)
+
 (after! org-journal
         (setq org-roam-completion-everywhere t)
 )
-
 
 (after! org-roam
         (setq org-roam-completion-everywhere t)
@@ -70,14 +74,14 @@
                                 (text-scale-increase 0)
                                 ))
 
+(setq-default left-margin-width 8 right-margin-width 8) ; Define new widths.
+(set-window-buffer nil (current-buffer)) ; Use them now.
 (setq-default line-spacing 2)
 (setq doom-modeline-height 35)
 
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-dabbrev-downcase 0)
-(setq company-idle-delay 0)
-
 (add-hook 'after-init-hook 'global-hl-todo-mode)
+;; count nested todos in summary
+(setq org-hierarchical-todo-statistics nil)
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
     )
@@ -152,6 +156,11 @@
 
 (after! org-agenda
   (org-super-agenda-mode))
+
+
+;; inherit shell variables
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

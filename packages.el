@@ -6,7 +6,7 @@
 ;; use 'M-x doom/reload'.
 
 (package! evil-surround )
-
+(package! exec-path-from-shell)
 (package! org-download)
 
 (package! org-super-agenda)
