@@ -32,7 +32,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 
-(setq org-agenda-files (directory-files-recursively "~/iCloud/org/" "\\.org$"))
+;; (setq org-agenda-files (directory-files-recursively "~/iCloud/org/" "\\.org$"))
 (setq org-roam-directory "~/iCloud/org")
 (add-hook 'after-init-hook 'org-roam-mode)
 
