@@ -93,6 +93,7 @@
 ;;   '(org-level-2 ((t (:inherit :weight semi-bold))))
 ;;   '(org-level-3 ((t (:inherit :weight regular)))))
 
+(setq org-ellipsis "⬎")
 (setq org-hide-emphasis-markers t)
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width (/ (display-pixel-width) 4))
